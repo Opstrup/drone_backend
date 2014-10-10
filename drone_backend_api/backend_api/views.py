@@ -1,11 +1,11 @@
 """
 Views for backend
+These views represents the allowed data to get from the API.
 """
 
-from backend_api.models import Drone
-#from django.contrib.auth.models import Drone#, User, Event, Waypoint, Picture
+from backend_api.models import Drone, User
 from rest_framework import viewsets
-from backend_api.serializers import DroneSerializer
+from backend_api.serializers import DroneSerializer, UserSerializer
 
 class DroneViewSet(viewsets.ModelViewSet):
     """
@@ -13,3 +13,10 @@ class DroneViewSet(viewsets.ModelViewSet):
     """
     queryset = Drone.objects.all()
     serializer_class = DroneSerializer
+
+class UserViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows users to be viewed or edited.
+    """
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
