@@ -4,7 +4,6 @@ Models for the autonomous surveillance drone system.
 
 from django.db import models
 
-# Create your models here.
 class Drone(models.Model):
     """
     Drone table in the database:
