@@ -1,18 +1,23 @@
 """
 docstring for DroneAdmin
+All tables in the system can be viewed from the admin
+page and manipulated.
 """
 
-from django.contrib import admin
+# pylint: disable=R0904
+# pylint: disable=R0903
+# pylint: disable=w0232
+# pylint: disable=C1001
+# pylint: disable=C0111
 
-# Register your models here.
-from .models import Drone, User
+from django.contrib import admin
+from .models import Drone, User, Event, Waypoint, Picture
 
 class DroneAdmin(admin.ModelAdmin):
     """
     docstring for DroneAdmin
     """
     class Meta:
-        """docstring for Meta"""
         model = Drone
 
 class UserAdmin(admin.ModelAdmin):
@@ -20,8 +25,28 @@ class UserAdmin(admin.ModelAdmin):
     docstring for UserAdmin
     """
     class Meta:
-        """docstring for Meta"""
         model = User
+
+class EventAdmin(admin.ModelAdmin):
+    """
+    docstring for EventAdmin
+    """
+    class Meta:
+        model = Event
+
+class WaypointAdmin(admin.ModelAdmin):
+    """
+    docstring for EventAdmin
+    """
+    class Meta:
+        model = Waypoint
+
+class PictureAdmin(admin.ModelAdmin):
+    """
+    docstring for EventAdmin
+    """
+    class Meta:
+        model = Picture
 
             
 admin.site.register(User, UserAdmin)

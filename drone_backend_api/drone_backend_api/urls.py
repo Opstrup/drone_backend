@@ -17,6 +17,8 @@ urlpatterns = patterns('backend_api.views'
                        # API urls
                        url(r'^api/drones/$', 'drone_list'),
                        url(r'^api/users/$', 'user_list'),
+                       url(r'^api/events/$', 'event_list'),
+                       url(r'^api/events/)(?P<pk>[0-9]+)/$', 'single_event'),
                        url(r'^api/drones/(?P<pk>[0-9]+)/$', 'single_drone'),
                        url(r'^api-auth/', include('rest_framework.urls',
                                                   namespace='rest_framework')),
