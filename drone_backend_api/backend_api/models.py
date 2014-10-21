@@ -3,16 +3,7 @@ Models for the autonomous surveillance drone system.
 """
 
 from django.db import models
-# from PIL import Image
 
-# def get_location():
-#     """
-#     Helper method:
-#     Locates where the pictures from the drone should be saved.
-#     """
-#     return "pictures/"
-
-# Create your models here.
 class Drone(models.Model):
     """
     Drone table in the database:
@@ -22,6 +13,8 @@ class Drone(models.Model):
     is_online = models.BooleanField(default=False)
     model = models.CharField(max_length=50, null=True, blank=True)
     next_event = models.IntegerField(null=True)
+    latitude = models.CharField(max_length=100)
+    longitude = models.CharField(max_length=100)
 
 class User(models.Model):
     """

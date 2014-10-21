@@ -1,29 +1,57 @@
-from rest_framework import serializers
-#from django.contrib.auth.models import Drone#, User, Event, Waypoint, Picture
-#from backend_api.models import Drone#, User, Event, Waypoint, Picture
-from backend_api.models import Drone
+"""
+Serializer file for backend.
+This file contains the classes which provieds the tables attributes
+to the rest of the api. 
+"""
+# pylint: disable=w0232
+# pylint: disable=R0903
+# pylint: disable=C1001
+# pylint: disable=C0111
 
-class DroneSerializer(serializers.HyperlinkedModelSerializer):
+
+from rest_framework import serializers
+from .models import Drone, User, Event, Waypoint, Picture
+
+class DroneSerializer(serializers.ModelSerializer):
+    """
+    Serializer for the drone table
+    """
     class Meta:
         model = Drone
-        #fields = ('id', 'status', 'is_online', 'model', 'next_event')
-        fields = ('status', 'is_online', 'model', 'next_event')
+        fields = ('id', 'status', 'is_online', 'model', 
+                  'next_event', 'latitude', 'longitude')
 
-    # def restore_object(self, attrs, instance=None):
-    #     """
-    #     Create or update a new snippet instance, given a dictionary
-    #     of deserialized field values.
+class UserSerializer(serializers.ModelSerializer):
+    """
+    Serializer for the user table
+    """
+    class Meta:
+        model = User
+        fields = ('id', 'user_name', 'password', 'first_name', 
+                  'last_name', 'email', 'drone_id')
 
-    #     Note that if we don't define this method, then deserializing
-    #     data will simply return a dictionary of items.
-    #     """
-    #     if instance:
-    #         # Update existing instance
-    #         instance.status = attrs.get('status', instance.status)
-    #         instance.is_online = attrs.get('is_online', instance.is_online)
-    #         instance.model = attrs.get('model', instance.model)
-    #         instance.next_event = attrs.get('next_event', instance.next_event)
-    #         return instance
+class EventSerializer(serializers.ModelSerializer):
+    """
+    Serializer for the event table
+    """
+    class Meta:
+        model = Event
+        fields = ('id', 'name', 'timestamp', 'updated', 
+                  'comment', 'error_code', 'drone_id', 'user_id')
 
-    #     # Create new instance
-    #     return DroneBackendApiSerializer(**attrs)
+class WaypointSerializer(serializers.ModelSerializer):
+    """
+    Serializer for the waypoint table
+    """
+    class Meta:
+        model = Waypoint
+        fields = ('latitude', 'longitude', 'height', 
+                  'take_photo', 'event_id')
+
+class PictureSerializer(serializers.ModelSerializer):
+    """
+    Serializer for the picture table
+    """
+    class Meta:
+        model = Picture
+        fields = ('id', 'event_id', 'timestamp', 'picture')
