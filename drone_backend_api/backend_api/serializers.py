@@ -27,7 +27,7 @@ class UserSerializer(serializers.ModelSerializer):
     """
     class Meta:
         model = User
-        fields = ('user_name', 'password', 'first_name', 
+        fields = ('id', 'user_name', 'password', 'first_name', 
                   'last_name', 'email', 'drone_id')
 
 class EventSerializer(serializers.ModelSerializer):

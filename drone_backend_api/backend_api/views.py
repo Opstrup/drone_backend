@@ -7,10 +7,10 @@ These views represents the allowed data to get from the API.
 # pylint: disable=E0602
 # pylint: disable=E1101
 
-from backend_api.models import Drone, User, Event
+from backend_api.models import Drone, User, Event, Picture, Waypoint
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-from backend_api.serializers import DroneSerializer, UserSerializer, EventSerializer
+from backend_api.serializers import DroneSerializer, UserSerializer, EventSerializer, PictureSerializer, WaypointSerializer
 
 @api_view(['GET'])
 def user_list(request):
@@ -87,3 +87,61 @@ def single_event(request):
             return Response(serializer_event.data)
         return Response(serializer_event.errors, 
                         status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['GET', 'POST'])
+def pictures_list(request):
+    """
+    List all pictures, or create a new picture.
+    """
+    if request.method == 'GET':
+        pictures = Picture.objects.all()
+        serializer_pictures = PictureSerializer(pictures, many=True)
+        return Response(serializer_pictures.data)
+
+    elif request.method == 'POST':
+        serializer_pictures = PictureSerializer(data=request.DATA)
+        if serializer_pictures.is_valid():
+            serializer_pictures.save()
+            return Response(serializer_pictures.data, status=status.HTTP_201_CREATED)
+        return Response(serializer_pictures.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['GET', 'DELETE'])
+def picture_detail(request, pk):
+    """
+    Detail view of single picture or delete a picture.
+    """
+    try:
+        picture = Picture.objects.get(pk=pk)
+    except Picture.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == 'GET':
+        serializer_pictures = PictureSerializer(picture)
+        return Response(serializer_pictures.data)
+
+    elif request.method == 'DELETE':
+        picture.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+@api_view(['GET', 'POST'])
+def waypoint_list(request):
+    """
+    List all waypoints, or create a new waypoints.
+    """
+    if request.method == 'GET':
+        waypoints = Waypoint.objects.all()
+        serializer_waypoints = WaypointSerializer(waypoints, many=True)
+        return Response(serializer_waypoints.data)
+
+    elif request.method == 'POST':
+        serializer_waypoints = WaypointSerializer(data=request.DATA)
+        if serializer_waypoints.is_valid():
+            serializer_waypoints.save()
+            return Response(serializer_waypoints.data, status=status.HTTP_201_CREATED)
+        return Response(serializer_waypoints.errors, status=status.HTTP_400_BAD_REQUEST)    
+
+
+
+
+
+

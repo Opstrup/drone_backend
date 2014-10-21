@@ -49,5 +49,6 @@ class PictureAdmin(admin.ModelAdmin):
         model = Picture
 
             
+admin.site.register(Event, EventAdmin)
 admin.site.register(User, UserAdmin)
 admin.site.register(Drone, DroneAdmin)
