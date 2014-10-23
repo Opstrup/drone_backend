@@ -7,9 +7,10 @@ from django.conf.urls import url, include, patterns
 from django.contrib import admin
 from rest_framework.urlpatterns import format_suffix_patterns
 
-
 urlpatterns = patterns('backend_api.views'
                        '',
+                       # Frontend urls
+                       url(r'^$', 'index_page'),
 
                        # Admin page url
                        url(r'^admin/', include(admin.site.urls)),
