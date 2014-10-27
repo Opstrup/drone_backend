@@ -15,17 +15,7 @@ from backend_api.models import Drone, User, Event, Picture, Waypoint
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from backend_api.serializers import DroneSerializer, UserSerializer, EventSerializer, PictureSerializer, WaypointSerializer
-from django.http import HttpResponse
 
-"""
-Front views
-"""
-def index_page(request):
-    return HttpResponse('<html>hello</html>')
-
-"""
-The following functions is functions for the backend API.
-"""
 @api_view(['GET'])
 def user_list(request):
     """

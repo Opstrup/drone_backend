@@ -9,8 +9,6 @@ from rest_framework.urlpatterns import format_suffix_patterns
 
 urlpatterns = patterns('backend_api.views'
                        '',
-                       # Frontend urls
-                       url(r'^$', 'index_page'),
 
                        # Admin page url
                        url(r'^admin/', include(admin.site.urls)),
