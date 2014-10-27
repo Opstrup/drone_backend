@@ -55,10 +55,10 @@ ROOT_URLCONF = 'drone_backend_api.urls'
 
 WSGI_APPLICATION = 'drone_backend_api.wsgi.application'
 
-REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAdminUser',),
-    'PAGINATE_BY': 10
-}
+# REST_FRAMEWORK = {
+#     'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAdminUser',),
+#     'PAGINATE_BY': 10
+# }
 
 # Database
 # https://docs.djangoproject.com/en/dev/ref/settings/#databases
