@@ -4,4 +4,3 @@ Djangorestframework
 Selenium
 Pillow
 Mock
-Git
