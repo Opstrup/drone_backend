@@ -1,5 +1,9 @@
 """
-Views for backend
+This file contains all the views for the drone controll web app.
+Views for frontend:
+These views represents the views for the client side of the web app.
+____________________
+Views for backend:
 These views represents the allowed data to get from the API.
 """
 # pylint: disable=R0904
@@ -52,7 +56,7 @@ def single_drone(request, pk):
         if serializer_drone.is_valid():
             serializer_drone.save()
             return Response(serializer_drone.data)
-        return Response(serializer_drone.errors, 
+        return Response(serializer_drone.errors,
                         status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET'])
@@ -85,7 +89,7 @@ def single_event(request):
         if serializer_event.is_valid():
             serializer_event.save()
             return Response(serializer_event.data)
-        return Response(serializer_event.errors, 
+        return Response(serializer_event.errors,
                         status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET', 'POST'])
@@ -138,10 +142,4 @@ def waypoint_list(request):
         if serializer_waypoints.is_valid():
             serializer_waypoints.save()
             return Response(serializer_waypoints.data, status=status.HTTP_201_CREATED)
-        return Response(serializer_waypoints.errors, status=status.HTTP_400_BAD_REQUEST)    
-
-
-
-
-
-
+        return Response(serializer_waypoints.errors, status=status.HTTP_400_BAD_REQUEST)

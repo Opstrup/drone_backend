@@ -52,3 +52,5 @@ class PictureAdmin(admin.ModelAdmin):
 admin.site.register(Event, EventAdmin)
 admin.site.register(User, UserAdmin)
 admin.site.register(Drone, DroneAdmin)
+admin.site.register(Waypoint, WaypointAdmin)
+admin.site.register(Picture, PictureAdmin)
