@@ -11,12 +11,13 @@ These views represents the allowed data to get from the API.
 # pylint: disable=E0602
 # pylint: disable=E1101
 
+from rest_framework import status
 from backend_api.models import Drone, User, Event, Picture, Waypoint
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from backend_api.serializers import DroneSerializer, UserSerializer, EventSerializer, PictureSerializer, WaypointSerializer
 
-@api_view(['GET'])
+@api_view(['GET', 'POST'])
 def user_list(request):
     """
     Method for getting list with all users in the system.
@@ -26,7 +27,14 @@ def user_list(request):
         serializer_user = UserSerializer(user, many=True)
         return Response(serializer_user.data)
 
-@api_view(['GET'])
+    elif request.method == 'POST':
+        serializer_user = UserSerializer(data=request.DATA)
+        if serializer_user.is_valid():
+            serializer_user.save()
+            return Response(serializer_user.data, status=status.HTTP_201_CREATED)
+        return Response(serializer_user.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['GET', 'POST'])
 def drone_list(request):
     """
     Method for getting list with all drones in the system.
@@ -35,6 +43,13 @@ def drone_list(request):
         drone = Drone.objects.all()
         serializer_drone = DroneSerializer(drone, many=True)
         return Response(serializer_drone.data)
+
+    elif request.method == 'POST':
+        serializer_drone = DroneSerializer(data=request.DATA)
+        if serializer_drone.is_valid():
+            serializer_drone.save()
+            return Response(serializer_drone.data, status=status.HTTP_201_CREATED)
+        return Response(serializer_drone.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET', 'PUT'])
 def single_drone(request, pk):
@@ -56,10 +71,9 @@ def single_drone(request, pk):
         if serializer_drone.is_valid():
             serializer_drone.save()
             return Response(serializer_drone.data)
-        return Response(serializer_drone.errors,
-                        status=status.HTTP_400_BAD_REQUEST)
+        return Response(serializer_drone.errors, status=status.HTTP_400_BAD_REQUEST)
 
-@api_view(['GET'])
+@api_view(['GET', 'POST'])
 def event_list(request):
     """
     Method for getting list with all events in the system.
@@ -68,6 +82,13 @@ def event_list(request):
         event = Event.objects.all()
         serializer_event = EventSerializer(event, many=True)
         return Response(serializer_event.data)
+
+    elif request.method == 'POST':
+        serializer_event = EventSerializer(data=request.DATA)
+        if serializer_event.is_valid():
+            serializer_event.save()
+            return Response(serializer_event.data, status=status.HTTP_201_CREATED)
+        return Response(serializer_event.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET', 'PUT'])
 def single_event(request):
@@ -143,3 +164,22 @@ def waypoint_list(request):
             serializer_waypoints.save()
             return Response(serializer_waypoints.data, status=status.HTTP_201_CREATED)
         return Response(serializer_waypoints.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['GET'])
+def waypoint_for_event(request, event_id):
+    """
+    List all waypoint specified to a single waypoint.
+    """
+    try:
+        waypoint = Waypoint.objects.all()
+    except Waypoint.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == 'GET':
+        waypoint = waypoint.filter(event_id=event_id)
+        serializer_waypoints = WaypointSerializer(waypoint, many=True)
+        return Response(serializer_waypoints.data)
+
+
+
+

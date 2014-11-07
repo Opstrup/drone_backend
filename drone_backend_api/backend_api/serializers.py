@@ -1,7 +1,7 @@
 """
 Serializer file for backend.
 This file contains the classes which provieds the tables attributes
-to the rest of the api. 
+to the rest of the api.
 """
 # pylint: disable=w0232
 # pylint: disable=R0903
@@ -18,7 +18,7 @@ class DroneSerializer(serializers.ModelSerializer):
     """
     class Meta:
         model = Drone
-        fields = ('id', 'status', 'is_online', 'model', 
+        fields = ('id', 'is_online', 'model',
                   'next_event', 'latitude', 'longitude')
 
 class UserSerializer(serializers.ModelSerializer):
@@ -27,7 +27,7 @@ class UserSerializer(serializers.ModelSerializer):
     """
     class Meta:
         model = User
-        fields = ('id', 'user_name', 'password', 'first_name', 
+        fields = ('id', 'user_name', 'password', 'first_name',
                   'last_name', 'email', 'drone_id')
 
 class EventSerializer(serializers.ModelSerializer):
@@ -36,8 +36,8 @@ class EventSerializer(serializers.ModelSerializer):
     """
     class Meta:
         model = Event
-        fields = ('id', 'name', 'timestamp', 'updated', 
-                  'comment', 'error_code', 'drone_id', 'user_id')
+        fields = ('id', 'name', 'timestamp', 'updated',
+                  'comment', 'error_code', 'drone', 'user')
 
 class WaypointSerializer(serializers.ModelSerializer):
     """
@@ -45,7 +45,7 @@ class WaypointSerializer(serializers.ModelSerializer):
     """
     class Meta:
         model = Waypoint
-        fields = ('latitude', 'longitude', 'height', 
+        fields = ('id', 'latitude', 'longitude', 'height',
                   'take_photo', 'event_id')
 
 class PictureSerializer(serializers.ModelSerializer):

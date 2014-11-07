@@ -9,7 +9,6 @@ class Drone(models.Model):
     Drone table in the database:
     The drone is the hardware unit in the system.
     """
-    status = models.CharField(max_length=30, null=True, blank=True)
     is_online = models.BooleanField(default=False)
     model = models.CharField(max_length=50, null=True, blank=True)
     next_event = models.IntegerField(null=True)
@@ -40,8 +39,8 @@ class Event(models.Model):
     updated = models.DateTimeField(auto_now_add=False, auto_now=True)
     comment = models.CharField(max_length=100, null=True, blank=True)
     error_code = models.IntegerField(null=True)
-    drone_id = models.ForeignKey(Drone)
-    user_id = models.ManyToManyField(User)
+    drone = models.ManyToManyField(Drone)
+    user = models.ManyToManyField(User)
 
 class Waypoint(models.Model):
     """
