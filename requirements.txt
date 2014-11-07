@@ -4,3 +4,4 @@ Djangorestframework
 Selenium
 Pillow
 Mock
+django-cors-headers
