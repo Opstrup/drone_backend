@@ -15,6 +15,7 @@ urlpatterns = patterns('backend_api.views'
 
                        # API urls
                        url(r'^api/waypoints/$', 'waypoint_list'),
+                       url(r'^api/waypointsForEvent/(?P<event_id>[0-9]+)/$', 'waypoint_for_event'),
                        url(r'^api/users/$', 'user_list'),
                        url(r'^api/pictures/$', 'pictures_list'),
                        url(r'^api/pictures/(?P<pk>[0-9]+)/$', 'picture_detail'),
