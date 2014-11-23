@@ -1,8 +1,5 @@
 """
-This file contains all the views for the drone controll web app.
-Views for frontend:
-These views represents the views for the client side of the web app.
-____________________
+This file contains all the views for the drone controle backend.
 Views for backend:
 These views represents the allowed data to get from the API.
 """
@@ -91,7 +88,7 @@ def event_list(request):
         return Response(serializer_event.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET', 'PUT'])
-def single_event(request):
+def single_event(request, pk):
     """
     Method for getting single event.
     Allowed: GET and PUT
@@ -179,7 +176,3 @@ def waypoint_for_event(request, event_id):
         waypoint = waypoint.filter(event_id=event_id)
         serializer_waypoints = WaypointSerializer(waypoint, many=True)
         return Response(serializer_waypoints.data)
-
-
-
-
