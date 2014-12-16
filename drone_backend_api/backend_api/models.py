@@ -46,7 +46,7 @@ class Waypoint(models.Model):
     """
     Waypoint table in the database:
     Each waypoint desides actions for the drone,
-    has a foreingkey to route for encapsulation reasons.
+    has a foreingkey to event.
     """
     latitude = models.CharField(max_length=100)
     longitude = models.CharField(max_length=100)
@@ -58,7 +58,7 @@ class Picture(models.Model):
     """
     Picture table in the database:
     Each picture represents a picture taken during flight,
-    the pictures is linked to an event via a foreingkey in Event.
+    the pictures is linked to an event via a foreingkey.
     """
     event_id = models.ForeignKey(Event)
     timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)

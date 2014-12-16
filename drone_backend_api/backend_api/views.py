@@ -17,7 +17,8 @@ from backend_api.serializers import DroneSerializer, UserSerializer, EventSerial
 @api_view(['GET', 'POST'])
 def user_list(request):
     """
-    Method for getting list with all users in the system.
+    Method for getting list with all users in the system
+    Allowed: GET and POST
     """
     if request.method == 'GET':
         user = User.objects.all()
@@ -34,7 +35,8 @@ def user_list(request):
 @api_view(['GET', 'POST'])
 def drone_list(request):
     """
-    Method for getting list with all drones in the system.
+    Method for getting list with all drones in the system
+    Allowed: GET and POST
     """
     if request.method == 'GET':
         drone = Drone.objects.all()
@@ -51,7 +53,7 @@ def drone_list(request):
 @api_view(['GET', 'PUT'])
 def single_drone(request, pk):
     """
-    Method for getting single drone.
+    Method for getting single drone
     Allowed: GET and PUT
     """
     try:
@@ -73,7 +75,8 @@ def single_drone(request, pk):
 @api_view(['GET', 'POST'])
 def event_list(request):
     """
-    Method for getting list with all events in the system.
+    Method for getting list with all events in the system
+    Allowed: GET and POST
     """
     if request.method == 'GET':
         event = Event.objects.all()
@@ -90,7 +93,7 @@ def event_list(request):
 @api_view(['GET', 'PUT'])
 def single_event(request, pk):
     """
-    Method for getting single event.
+    Method for getting single event
     Allowed: GET and PUT
     """
     try:
@@ -113,7 +116,8 @@ def single_event(request, pk):
 @api_view(['GET', 'POST'])
 def pictures_list(request):
     """
-    List all pictures, or create a new picture.
+    List all pictures, or create a new picture
+    Allowed: GET and POST
     """
     if request.method == 'GET':
         pictures = Picture.objects.all()
@@ -130,7 +134,8 @@ def pictures_list(request):
 @api_view(['GET', 'DELETE'])
 def picture_detail(request, pk):
     """
-    Detail view of single picture or delete a picture.
+    Detail view of single picture or delete a picture
+    Allowed: GET and DELETE
     """
     try:
         picture = Picture.objects.get(pk=pk)
@@ -148,7 +153,8 @@ def picture_detail(request, pk):
 @api_view(['GET', 'POST'])
 def waypoint_list(request):
     """
-    List all waypoints, or create a new waypoints.
+    List all waypoints, or create a new waypoints
+    Allowed: GET and POST
     """
     if request.method == 'GET':
         waypoints = Waypoint.objects.all()
@@ -165,7 +171,8 @@ def waypoint_list(request):
 @api_view(['GET'])
 def waypoint_for_event(request, event_id):
     """
-    List all waypoint specified to a single waypoint.
+    List all waypoint specified to a single waypoint
+    Allowed: GET
     """
     try:
         waypoint = Waypoint.objects.all()

@@ -1,7 +1,5 @@
 """
-docstring for DroneAdmin
-All tables in the system can be viewed from the admin
-page and manipulated.
+Admin file for drone project
 """
 
 # pylint: disable=R0904
@@ -15,35 +13,35 @@ from .models import Drone, User, Event, Waypoint, Picture
 
 class DroneAdmin(admin.ModelAdmin):
     """
-    docstring for DroneAdmin
+    Drone table
     """
     class Meta:
         model = Drone
 
 class UserAdmin(admin.ModelAdmin):
     """
-    docstring for UserAdmin
+    User table
     """
     class Meta:
         model = User
 
 class EventAdmin(admin.ModelAdmin):
     """
-    docstring for EventAdmin
+    Event table
     """
     class Meta:
         model = Event
 
 class WaypointAdmin(admin.ModelAdmin):
     """
-    docstring for EventAdmin
+    Waypoint table 
     """
     class Meta:
         model = Waypoint
 
 class PictureAdmin(admin.ModelAdmin):
     """
-    docstring for EventAdmin
+    Picture table
     """
     class Meta:
         model = Picture
